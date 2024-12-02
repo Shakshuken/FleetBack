@@ -1,0 +1,116 @@
+[
+    {
+        "target_class": "models:Company",
+        "data": [
+            {
+                "name": "Test Company"
+            },
+          {
+                "name": "Test Company 2"
+            }
+        ]
+    },
+    {
+        "target_class": "models:User",
+        "data": [
+            {
+                "username": "superadmin",
+                "email": "superadmin@superadmin.com",
+                "role": "superadmin",
+                "company_id": null
+            },
+            {
+                "username": "admin",
+                "email": "admin@admin.com",
+                "role": "admin",
+                "!refs": {
+                    "company_id": {
+                        "target_class": "models:Company",
+                        "criteria": {
+                            "name" : "Test Company"
+                        },
+                        "field": "id"
+                    }
+                }
+            },
+            {
+                "username": "manager",
+                "email": "manager@manager.com",
+                "role": "manager",
+                "!refs": {
+                    "company_id": {
+                        "target_class": "models:Company",
+                        "criteria": {
+                            "name" : "Test Company 2"
+                        },
+                        "field": "id"
+                    }
+                }
+            },
+            {
+                "username": "driver",
+                "email": "driver@driver.com",
+                "role": "driver",
+                "total_rides": 100
+            },
+             {
+                "username": "driver 2",
+                "email": "driver2@driver.com",
+                "role": "driver",
+                "total_rides": 200
+            }
+        ]
+    },
+    {
+        "target_class": "models:Vehicle",
+        "data": [
+            {
+                "model": "Test Car Model",
+                "total_rides": 100,
+                "!refs": {
+                    "current_driver_id": {
+                        "target_class": "models:Driver",
+                        "field": "id"
+                    }
+                }
+            },
+            {
+                "model": "Test Car Model 2",
+                "total_rides": 200,
+                "!refs": {
+                    "current_driver_id": {
+                        "target_class": "models:Driver",
+                        "field": "id"
+                    }
+                }
+            }
+        ]
+    },
+    {
+        "target_class": "models:Driver",
+        "data": [
+            {
+                "name": "John Doe",
+                "total_trips": 100,
+                "hire_date": "2022-23-02",
+                "birth_date": "",
+                "itn": "1231231231",
+                "driver_experience": 111,
+                "!refs": {
+                    "user_id": {
+                        "target_class": "models:User",
+                        "criteria": {
+                            "role": "driver",
+                            "username": "driver"
+                        },
+                        "field": "id"
+                    },
+                    "assigned_vehicle_id": {
+                        "target_class": "models:Vehicle",
+                        "field": "id"
+                    }
+                }
+            }
+        ]
+    }
+]
